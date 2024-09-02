@@ -7,11 +7,14 @@ using namespace std;
 
 int main(){
 	
-    int House[5], numHouse = 0, numBathroom, numBedroom, counter = 0;
-    int bedSize[5], paintWorker, floorWorker, kitchenSize;
-    int paintCost, flooringCost, laborCost, paintTime, floorTime;
+    int House[5], bedSize[5], numHouse = 0, counter, numBathroom, numBedroom;
+    int paintCost, flooringCost, laborCost, paintTime, floorTime, paintWorker, floorWorker, kitchenSize;
     string houseType;
-
+	
+//	
+//	for(counter = 0; counter<numHouse){
+//	}
+	
     do {
         cout << "Enter the Number of Houses (1-5): ";
         cin >> numHouse;
@@ -33,7 +36,7 @@ int main(){
     } while (true); // Continue until a valid input is received
 	
 	
-	do{
+	for(counter = 0; counter<numHouse; counter++){
 	
 	cout<<"\nChoose the House Type (Lin/Lan): ";
 	cin>>houseType;
@@ -69,15 +72,11 @@ if(houseType == "lin"){
 	cout<<"\nEnter the size of the kitchen in sqm: ";
 	cin>>kitchenSize;
 	
-	cout<<"\nEnter the number of bathrooms: ";
+	cout<<"\nEnter the number of bathrooms: "<<endl;
 	cin>>numBathroom;
 
-	cout<<"\nEnter number of workers for painting: ";
-	cin>>paintWorker;
-
-
 	do {
-        cout<<"\nEnter number of workers for painting: ";
+        cout<<"Enter number of workers for painting: ";
 		cin>>paintWorker;
         cin.ignore();
 
@@ -115,6 +114,8 @@ if(houseType == "lin"){
             break; // Valid input, break out of the loop
         }
     } while (true); // Continue until a valid input is received
+    
+    cout<<"\n";
     
     do {
         cout<<"Enter number of workers for flooring: ";
@@ -163,7 +164,7 @@ if(houseType == "lin"){
 	counter++;
 }
 
-}while(counter!=numHouse);
+}
 	
 	return 0;
 }
