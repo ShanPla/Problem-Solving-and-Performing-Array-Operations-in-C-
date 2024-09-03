@@ -4,16 +4,13 @@
 #include <limits> // for numeric_limits
 using namespace std;
 
-
 int main(){
 	
     int House[5], bedSize[5], numHouse = 0, counter, numBathroom, numBedroom;
-    int paintCost, flooringCost, laborCost, paintTime, floorTime, paintWorker, floorWorker, kitchenSize;
-    string houseType;
+    int paintTime, paintWorker, floorTime, floorWorker, kitchenSize;
+    float paintCost, paintTotal[5], kitchenCost, flooringCost, laborCost;
+	string houseType;
 	
-//	
-//	for(counter = 0; counter<numHouse){
-//	}
 	
     do {
         cout << "Enter the Number of Houses (1-5): ";
@@ -35,24 +32,34 @@ int main(){
         }
     } while (true); // Continue until a valid input is received
 	
-	
 	for(counter = 0; counter<numHouse; counter++){
-	
+		
+	// Handles the inputs for the house type
+	do{
+		
 	cout<<"\nChoose the House Type (Lin/Lan): ";
 	cin>>houseType;
-
+	
 	// Makes the input non-case sensitive
 	for (int i = 0; i < houseType.length(); i++)
         houseType[i] = tolower(houseType[i]);
+		
+}while(!(houseType=="lin" || houseType=="lan"));
 	
 	
-	
+	// Does the inputs for house type lin
 if(houseType == "lin"){
 	
 	do{
 		
+	flooringCost += 123450; //Flooring cost initialized to set value for Lin	
+		
 	cout<<"\nEnter the number of bedrooms: ";
 	cin>>numBedroom;
+	
+	if(numBedroom>2 && numBathroom<5){
+		flooringCost += (numBedroom-2)*8500;
+	}
 		
 	if(numBedroom<1 || numBedroom>4){
 		cout<<"\nOnly 1-4 bedroom capacity";
@@ -62,18 +69,43 @@ if(houseType == "lin"){
 	
 	
 	for(int i=0; i<numBedroom; i++){
+		
 		cout<<"Enter size of bedroom "<<i+1<<" in sqm: ";
 		cin>>bedSize[i];
+		
+		// Calculates the value of the painting cost
+		if(bedSize[i]<30){
+			paintCost += bedSize[i]*125;
+		}
+		
+		else if(bedSize[i]<41){
+			paintCost += bedSize[i]*175.25;
+		}
+		
+		else{
+			paintCost += bedSize[i]*205.50;
+		}
 	}
-//	for(int i=0; i<numHouse; i++){
-//		cout<<"\n"<<bedSize[i];
-//	}
 
 	cout<<"\nEnter the size of the kitchen in sqm: ";
 	cin>>kitchenSize;
 	
+	paintCost += 12500;	
+	
+	if(kitchenSize>50) {
+		paintCost += ((kitchenSize-50)*74.45);
+	}
+		cout<<paintCost;
+	
 	cout<<"\nEnter the number of bathrooms: "<<endl;
 	cin>>numBathroom;
+	
+		if(numBathroom>1){
+		flooringCost += (numBathroom-1)*4750;
+	}
+	
+	// Adds value to paintCost for total cost
+	paintCost += numBathroom*6550;
 
 	do {
         cout<<"Enter number of workers for painting: ";
@@ -115,6 +147,8 @@ if(houseType == "lin"){
         }
     } while (true); // Continue until a valid input is received
     
+    laborCost += (paintTime*650)*paintWorker; // Calculates the labor cost for painting
+    
     cout<<"\n";
     
     do {
@@ -149,20 +183,20 @@ if(houseType == "lin"){
             // Ignore the invalid input
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-            cout << "Invalid input. Please enter a number between 7 and 15." << endl;
-        } else if (floorTime < 7 || floorTime > 15) {
-            cout << "Incorrect input. Please enter a number between 7 and 15." << endl;
+            cout << "Invalid input. Please enter a number between 7 and 14." << endl;
+        } else if (floorTime < 7 || floorTime > 14) {
+            cout << "Incorrect input. Please enter a number between 7 and 14." << endl;
         } else {
             break; // Valid input, break out of the loop
         }
     } while (true); // Continue until a valid input is received
 
-
+	laborCost += (floorTime*550)*floorWorker; // Calculates the labor cost for flooring
 
 
 
 	counter++;
-}
+} // Lin border
 
 }
 	
