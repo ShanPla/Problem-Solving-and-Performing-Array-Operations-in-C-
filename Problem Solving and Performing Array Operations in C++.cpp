@@ -12,12 +12,19 @@ using namespace std;
 
 void displayTotal(){
 	
-	cout<<"\nTotal Cost for House #"<<counter<<endl;
+	for(counter = 0; counter<numHouse; counter++){
+		
+	cout<<"\nTotal Cost for House #"<<counter+1<<endl;
 	cout<<"Painting Cost: P"<<paintCost<<endl;
 	cout<<"Flooring Cost: P"<<flooringCost<<endl;
 	cout<<"Paint Labor Cost: P"<<paintLaborCost<<endl;
 	cout<<"Flooring Labor Cost: P"<<floorLaborCost<<endl;
-	cout<<"Total Overall Cost: P"<<paintCost + flooringCost + paintLaborCost + floorLaborCost;
+	cout<<"Total Overall Cost: P"<<paintCost + flooringCost + paintLaborCost + floorLaborCost<<endl;
+	cout<<"Total Days: "<<paintTime + floorTime<<" days"<<endl;
+
+}
+	
+	system("PAUSE");
 	
 	// Resets the value for the next iterations
 	paintCost = 0;
@@ -25,16 +32,11 @@ void displayTotal(){
 	paintLaborCost = 0;
 	floorLaborCost = 0;
 	
-	
-	
-
 }
 
 void LinHouse(){
 	
-	do{
-		
-	flooringCost += 123450; //Flooring cost initialized to set value for Lin	
+	do{	
 		
 	cout<<"\nEnter the number of bedrooms: ";
 	cin>>numBedroom;
@@ -184,8 +186,6 @@ void LinHouse(){
 
 	floorLaborCost += (floorTime*550)*floorWorker; // Calculates the labor cost for flooring
 	
-	displayTotal();
-	
 }
 
 
@@ -228,11 +228,18 @@ int main(){
         houseType[i] = tolower(houseType[i]);
         
     if(houseType == "lin"){
-		LinHouse();
+    	
+    	flooringCost += 123450; //Flooring cost initialized to set value for Lin
+		LinHouse(); // Calls the function
+		
 	}
+	
 	else if(houseType == "lan"){
-		LanHouse();
+		
+		flooringCost += 180500; //Flooring cost initialized to set value for Lan
+//		LanHouse(); // Calls the function
 	}
+	
 	else{
 		cout<<"Invalid input."<<endl;
 	}
@@ -240,8 +247,9 @@ int main(){
       	
 }while(!(houseType=="lin" || houseType=="lan"));
 	
-	
 }
+
+	displayTotal();
 	
 	return 0;
 }
