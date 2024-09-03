@@ -4,53 +4,33 @@
 #include <limits> // for numeric_limits
 using namespace std;
 
-int main(){
-	
-    int House[5], bedSize[5], numHouse = 0, counter, numBathroom, numBedroom;
+	int House[5], bedSize[5], numHouse = 0, counter, numBathroom, numBedroom;
     int paintTime, paintWorker, floorTime, floorWorker, kitchenSize;
-    float paintCost, flooringCost paintTotal[5], paintLaborCost, floorLaborCost;
+    float paintCost, flooringCost, paintTotal[5], paintLaborCost, floorLaborCost;
 	string houseType;
-	
-	
-    do {
-        cout << "Enter the Number of Houses (1-5): ";
-        cin >> numHouse;
-        cin.ignore();
 
-        if (cin.fail()) {
-            // Clear the error flag
-            cin.clear();
 
-            // Ignore the invalid input
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+void displayTotal(){
+	
+	cout<<"\nTotal Cost for House #"<<counter<<endl;
+	cout<<"Painting Cost: P"<<paintCost<<endl;
+	cout<<"Flooring Cost: P"<<flooringCost<<endl;
+	cout<<"Paint Labor Cost: P"<<paintLaborCost<<endl;
+	cout<<"Flooring Labor Cost: P"<<floorLaborCost<<endl;
+	cout<<"Total Overall Cost: P"<<paintCost + flooringCost + paintLaborCost + floorLaborCost;
+	
+	// Resets the value for the next iterations
+	paintCost = 0;
+	flooringCost = 0;
+	paintLaborCost = 0;
+	floorLaborCost = 0;
+	
+	
+	
 
-            cout << "\nInvalid input. Please enter a number between 1 and 5." << endl;
-            
-        } else if (numHouse < 1 || numHouse > 5) {
-            cout << "\nThe number of houses must be in the range of 1 to 5." << endl;
-            
-        } else {
-            break; // Valid input, break out of the loop
-        }
-    } while (true); // Continue until a valid input is received
-	
-	for(counter = 0; counter<numHouse; counter++){
-		
-	// Handles the inputs for the house type
-	do{
-		
-	cout<<"\nChoose the House Type (Lin/Lan): ";
-	cin>>houseType;
-	
-	// Makes the input non-case sensitive
-	for (int i = 0; i < houseType.length(); i++)
-        houseType[i] = tolower(houseType[i]);
-		
-}while(!(houseType=="lin" || houseType=="lan"));
-	
-	
-	// Does the inputs for house type lin
-if(houseType == "lin"){
+}
+
+void LinHouse(){
 	
 	do{
 		
@@ -203,17 +183,64 @@ if(houseType == "lin"){
     } while (true); // Continue until a valid input is received
 
 	floorLaborCost += (floorTime*550)*floorWorker; // Calculates the labor cost for flooring
-
-	cout<<"\nTotal Cost for House #"<<counter+1<<endl;
-	cout<<"Painting Cost: P"<<paintCost<<endl;
-	cout<<"Flooring Cost: P"<<flooringCost<<endl;
-	cout<<"Paint Labor Cost: P"<<paintLaborCost<<endl;
-	cout<<"Flooring Labor Cost: P"<<floorLaborCost<<endl;
-	cout<<"Total Overall Cost: P"<<paintCost + flooringCost + paintLaborCost + floorLaborCost;
 	
-	counter++;
-} // Lin border
+	displayTotal();
+	
+}
 
+
+
+
+int main(){
+	
+    do {
+        cout << "Enter the Number of Houses (1-5): ";
+        cin >> numHouse;
+        cin.ignore();
+
+        if (cin.fail()) {
+            // Clear the error flag
+            cin.clear();
+
+            // Ignore the invalid input
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            cout << "\nInvalid input. Please enter a number between 1 and 5." << endl;
+            
+        } else if (numHouse < 1 || numHouse > 5) {
+            cout << "\nThe number of houses must be in the range of 1 to 5." << endl;
+            
+        } else {
+            break; // Valid input, break out of the loop
+        }
+    } while (true); // Continue until a valid input is received
+	
+	for(counter = 0; counter<numHouse; counter++){
+		
+	// Handles the inputs for the house type
+	do{
+		
+	cout<<"\nChoose the House Type (Lin/Lan): ";
+	cin>>houseType;
+	
+	// Makes the input non-case sensitive
+	for (int i = 0; i < houseType.length(); i++)
+        houseType[i] = tolower(houseType[i]);
+        
+    if(houseType == "lin"){
+		LinHouse();
+	}
+	else if(houseType == "lan"){
+		LanHouse();
+	}
+	else{
+		cout<<"Invalid input."<<endl;
+	}
+        
+      	
+}while(!(houseType=="lin" || houseType=="lan"));
+	
+	
 }
 	
 	return 0;
